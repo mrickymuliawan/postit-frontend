@@ -3,8 +3,14 @@ import React from 'react'
 import Colors from '../styles/Colors'
 import logo from '../assets/logo_postit.png'
 import updateImg from '../assets/undraw_update.png'
+import { Link } from 'react-router-dom'
 
 function LoginPage() {
+
+  const submitForm = (value) => {
+    console.log(value)
+  }
+
   return (
     <Row>
       <Col xs={24} sm={12} style={{
@@ -26,15 +32,20 @@ function LoginPage() {
 
         <Form
           layout='vertical'
+          onFinish={submitForm}
         >
           <Form.Item
             label='Email'
+            name='email'
+            rules={[{ required: true, message: 'please fill email' }]}
           >
             <Input size='large' />
           </Form.Item>
 
           <Form.Item
             label='Password'
+            name='password'
+            rules={[{ required: true }]}
           >
             <Input.Password size='large' />
           </Form.Item>
@@ -50,12 +61,15 @@ function LoginPage() {
           </Row>
 
 
-          <Button block size='large' shape='round'>Login</Button>
+          <Button block size='large' shape='round' htmlType='submit'>Login</Button>
         </Form>
+
         <br />
-        <Button block size='large' shape='round' style={{ background: Colors.green2, color: 'white' }}
-        >Register
-        </Button>
+        <Link to={'/register'}>
+          <Button block size='large' shape='round' style={{ background: Colors.green2, color: 'white' }}
+          >Register
+          </Button>
+        </Link>
       </Col>
     </Row>
   )
